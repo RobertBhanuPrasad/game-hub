@@ -1,4 +1,4 @@
-import { Grid, GridItem, Flex, Box } from "@chakra-ui/react"
+import { Box, Flex, Grid, GridItem } from "@chakra-ui/react"
 import { useState } from "react"
 import GameGrid from "./components/GameGrid"
 import GenreList from "./components/GenreList"
@@ -12,6 +12,7 @@ export interface GameQuery {
   genre: Genre | null
   platform: Platform | null
   sortOrder: string
+  searchText: string
 }
 function App() {
   // const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
@@ -27,7 +28,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} />
       </GridItem>
       <GridItem area="aside" padding={5}>
         <GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })} />
